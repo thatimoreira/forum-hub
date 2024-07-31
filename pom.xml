@@ -58,7 +58,6 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
-			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
@@ -97,7 +96,19 @@
 					</excludes>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.flywaydb</groupId>
+				<artifactId>flyway-maven-plugin</artifactId>
+				<version>9.2.1</version>
+				<configuration>
+					<url>${env.MYSQL_SPRING_DATASOURCE_URL}</url>
+					<user>${env.MYSQL_SPRING_DATASOURCE_USERNAME}</user>
+					<password>${env.MYSQL_SPRING_DATASOURCE_PASSWORD}</password>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
 </project>
+
+
