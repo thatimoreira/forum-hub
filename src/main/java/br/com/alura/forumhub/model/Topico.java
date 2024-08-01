@@ -1,13 +1,6 @@
 package br.com.alura.forumhub.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Column;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.EnumType;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
@@ -17,20 +10,25 @@ public class Topico {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String titulo;
+
+    @Column(nullable = false)
     private String mensagem;
 
-    @Column(name = "data_criacao")
+    @Column(name = "data_criacao", nullable = false)
     private LocalDateTime dataCriacao = LocalDateTime.now();
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "status_topico")
+    @Column(name = "status_topico", nullable = false)
     private StatusTopico statusTopico = StatusTopico.NAO_RESPONDIDO;
 
     @ManyToOne
+    @JoinColumn(name = "autor_id", nullable = false)
     private Usuario autor;
 
     @ManyToOne
+    @JoinColumn(name = "curso_id", nullable = false)
     private Curso curso;
 
     public Long getId() {
